@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local manifest for the Redmi Note 14 Pro+ 5G (amethyst), LineageOS 23.2.
+
+  Clone this repository into $SRC/.repo/local_manifests, or copy this file
+  there.
+
+  The device tree lives in this repository:
+      https://github.com/Daxandere/android_device_xiaomi_amethyst
+
+  The kernel, vendor, hardware and sepolicy repositories stay on the
+  amethyst-playground organisation until they are forked. When you fork one,
+  change its `remote` from "upstream" to "mine".
+
+  This manifest uses HTTPS, which works without SSH keys on a fresh build
+  server. If you prefer SSH, replace the "mine" remote with:
+      <remote name="mine" fetch="git@github.com:Daxandere" />
+-->
+<manifest>
+  <remote name="lineage"  fetch="https://github.com/LineageOS" />
+  <remote name="upstream" fetch="https://github.com/amethyst-playground" />
+  <remote name="mine"     fetch="https://github.com/Daxandere" />
+
+  <project name="android_device_xiaomi_amethyst"
+           path="device/xiaomi/amethyst"
+           remote="mine"
+           revision="lineage-23.2" />
+
+  <project name="android_device_xiaomi_amethyst-kernel"
+           path="device/xiaomi/amethyst-kernel"
+           remote="upstream"
+           revision="lineage-23.2" />
+
+  <project name="proprietary_vendor_xiaomi_amethyst"
+           path="vendor/xiaomi/amethyst"
+           remote="upstream"
+           revision="lineage-23.2" />
+
+  <project name="android_hardware_xiaomi"
+           path="hardware/xiaomi"
+           remote="upstream"
+           revision="lineage-23.2" />
+
+  <project name="android_device_qcom_sepolicy_vndr"
+           path="device/qcom/sepolicy_vndr/sm8650"
+           remote="upstream"
+           revision="lineage-23.2-caf-sm8650" />
+</manifest>
