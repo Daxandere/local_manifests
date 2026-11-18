@@ -1,7 +1,13 @@
 # Local manifest
 
-`amethyst.xml` adds the five repositories needed to build LineageOS 23.2 for
+`amethyst.xml` adds the four repositories needed to build LineageOS 23.2 for
 the Redmi Note 14 Pro+ 5G.
+
+The Qualcomm pieces (`device/qcom/sepolicy_vndr/sm8650`,
+`hardware/qcom-caf/sm8650`, `hardware/qcom-caf/common` and
+`vendor/qcom/opensource/*`) are deliberately absent: LineageOS already provides
+them in `snippets/lineage.xml`. Adding them again makes `repo` abort with
+`duplicate path`.
 
 ## Usage
 
@@ -20,7 +26,24 @@ repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 | `device/xiaomi/amethyst-kernel` | `amethyst-playground/android_device_xiaomi_amethyst-kernel` | `upstream` |
 | `vendor/xiaomi/amethyst` | `amethyst-playground/proprietary_vendor_xiaomi_amethyst` | `upstream` |
 | `hardware/xiaomi` | `amethyst-playground/android_hardware_xiaomi` | `upstream` |
-| `device/qcom/sepolicy_vndr/sm8650` | `amethyst-playground/android_device_qcom_sepolicy_vndr` | `upstream` |
+
+## What it deliberately does not list
+
+LineageOS `snippets/lineage.xml` already brings in the shared Qualcomm trees at
+the exact paths this device needs. Re-declaring them is a hard error, not a
+warning: `repo` parses every manifest first and aborts the whole sync with
+`duplicate path`.
+
+| Path | Provided by LineageOS as |
+|---|---|
+| `device/qcom/sepolicy_vndr/sm8650` | `android_device_qcom_sepolicy_vndr`, branch `lineage-23.2-caf-sm8650` |
+| `device/qcom/sepolicy_vndr/SEPolicy.mk` | `linkfile` from `hardware/qcom-caf/common` |
+| `hardware/qcom-caf/sm8650` | audio, display and data-ipa trees |
+| `vendor/qcom/opensource/*` | display, power, core-utils-vendor, dataservices, ... |
+
+`core-utils-vendor` is worth noting because it provides the QSPA service
+(`vendor.qti.qspa-service` and `qspa_vendor.rc` from `qspaframework/`). The
+device tree references those modules but does not define them.
 
 ## Switching to your forks
 

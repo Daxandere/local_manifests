@@ -8,16 +8,23 @@
   The device tree lives in this repository:
       https://github.com/Daxandere/android_device_xiaomi_amethyst
 
-  The kernel, vendor, hardware and sepolicy repositories stay on the
+  The kernel, vendor and hardware/xiaomi repositories stay on the
   amethyst-playground organisation until they are forked. When you fork one,
   change its `remote` from "upstream" to "mine".
+
+  The Qualcomm pieces are NOT listed here on purpose: LineageOS already
+  provides them in snippets/lineage.xml, including
+      device/qcom/sepolicy_vndr/sm8650   (lineage-23.2-caf-sm8650)
+      hardware/qcom-caf/sm8650           (audio, display, data-ipa)
+      hardware/qcom-caf/common           (creates device/qcom/sepolicy_vndr/SEPolicy.mk)
+      vendor/qcom/opensource/*           (core-utils-vendor, power, display, ...)
+  Adding any of them again makes `repo` abort with "duplicate path".
 
   This manifest uses HTTPS, which works without SSH keys on a fresh build
   server. If you prefer SSH, change the "mine" fetch value to
   git@github.com:Daxandere (repo also accepts the ssh:// form).
 -->
 <manifest>
-  <remote name="lineage"  fetch="https://github.com/LineageOS" />
   <remote name="upstream" fetch="https://github.com/amethyst-playground" />
   <remote name="mine"     fetch="https://github.com/Daxandere" />
 
@@ -40,9 +47,4 @@
            path="hardware/xiaomi"
            remote="upstream"
            revision="lineage-23.2" />
-
-  <project name="android_device_qcom_sepolicy_vndr"
-           path="device/qcom/sepolicy_vndr/sm8650"
-           remote="upstream"
-           revision="lineage-23.2-caf-sm8650" />
 </manifest>
