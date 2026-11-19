@@ -8,9 +8,10 @@
   The device tree lives in this repository:
       https://github.com/Daxandere/android_device_xiaomi_amethyst
 
-  The kernel, vendor and hardware/xiaomi repositories stay on the
-  amethyst-playground organisation until they are forked. When you fork one,
-  change its `remote` from "upstream" to "mine".
+  The kernel and hardware/xiaomi repositories stay on the amethyst-playground
+  organisation until they are forked; the vendor repository is already forked
+  and lives under the "mine" remote. When you fork another one, change its
+  `remote` from "upstream" to "mine".
 
   The Qualcomm pieces are NOT listed here on purpose: LineageOS already
   provides them in snippets/lineage.xml, including
@@ -40,7 +41,7 @@
 
   <project name="proprietary_vendor_xiaomi_amethyst"
            path="vendor/xiaomi/amethyst"
-           remote="upstream"
+           remote="mine"
            revision="lineage-23.2" />
 
   <project name="android_hardware_xiaomi"
