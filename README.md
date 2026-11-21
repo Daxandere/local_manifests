@@ -1,7 +1,9 @@
 # Local manifest
 
-`amethyst.xml` adds the four repositories needed to build LineageOS 23.2 for
-the Redmi Note 14 Pro+ 5G.
+`amethyst.xml` adds the repositories for LineageOS 23.2 on the Redmi Note 14
+Pro+ 5G Global. It syncs the device tree, the kernel kit and headers, the vendor
+blobs and the matching Xiaomi HALs. The device configuration uses the published
+HyperOS Global 307 inputs directly.
 
 The Qualcomm pieces (`device/qcom/sepolicy_vndr/sm8650`,
 `hardware/qcom-caf/sm8650`, `hardware/qcom-caf/common` and
@@ -12,20 +14,31 @@ them in `snippets/lineage.xml`. Adding them again makes `repo` abort with
 ## Usage
 
 ```bash
-mkdir -p .repo/local_manifests
+mkdir -p ~/android/lineage-23.2
+cd ~/android/lineage-23.2
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
 git clone https://github.com/Daxandere/local_manifests .repo/local_manifests
-# or: cp amethyst.xml $SRC/.repo/local_manifests/
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+repo sync -c -j8 --no-clone-bundle --no-tags
+
+unset OUT_DIR OUT_DIR_COMMON_BASE
+. build/envsetup.sh
+breakfast amethyst
+m -j16 bacon
 ```
+
+Update an existing local-manifest checkout with
+`git -C .repo/local_manifests pull --ff-only` before running `repo sync`.
+For Linux dependencies and build verification, see the
+[device build guide](https://github.com/Daxandere/android_device_xiaomi_amethyst/blob/lineage-23.2/docs/BUILD.md).
 
 ## What it points to
 
 | Path | Repository | Remote |
 |---|---|---|
 | `device/xiaomi/amethyst` | `Daxandere/android_device_xiaomi_amethyst` | `mine` |
-| `device/xiaomi/amethyst-kernel` | `amethyst-playground/android_device_xiaomi_amethyst-kernel` | `upstream` |
-| `vendor/xiaomi/amethyst` | `amethyst-playground/proprietary_vendor_xiaomi_amethyst` | `upstream` |
-| `hardware/xiaomi` | `amethyst-playground/android_hardware_xiaomi` | `upstream` |
+| `device/xiaomi/amethyst-kernel` | `Daxandere/android_device_xiaomi_amethyst-kernel` | `mine`, branch `lineage-23.2-global307` |
+| `vendor/xiaomi/amethyst` | `Daxandere/proprietary_vendor_xiaomi_amethyst` | `mine`, branch `lineage-23.2` |
+| `hardware/xiaomi` | `amethyst-playground/android_hardware_xiaomi` | `upstream`, tested revision pinned in XML |
 
 ## What it deliberately does not list
 
@@ -44,20 +57,6 @@ warning: `repo` parses every manifest first and aborts the whole sync with
 `core-utils-vendor` is worth noting because it provides the QSPA service
 (`vendor.qti.qspa-service` and `qspa_vendor.rc` from `qspaframework/`). The
 device tree references those modules but does not define them.
-
-## Switching to your forks
-
-When you fork the vendor or kernel repository, change its `remote` from
-`upstream` to `mine` and set the revision to your branch.
-
-Example for the vendor repository:
-
-```xml
-<project name="proprietary_vendor_xiaomi_amethyst"
-         path="vendor/xiaomi/amethyst"
-         remote="mine"
-         revision="lineage-23.2" />
-```
 
 ## HTTPS vs SSH
 

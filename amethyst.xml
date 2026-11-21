@@ -8,10 +8,8 @@
   The device tree lives in this repository:
       https://github.com/Daxandere/android_device_xiaomi_amethyst
 
-  The kernel and hardware/xiaomi repositories stay on the amethyst-playground
-  organisation until they are forked; the vendor repository is already forked
-  and lives under the "mine" remote. When you fork another one, change its
-  `remote` from "upstream" to "mine".
+  Daxandere maintains the matching device, kernel and vendor trees for
+  HyperOS Global 307. Xiaomi hardware support uses the tested upstream revision.
 
   The Qualcomm pieces are NOT listed here on purpose: LineageOS already
   provides them in snippets/lineage.xml, including
@@ -36,8 +34,8 @@
 
   <project name="android_device_xiaomi_amethyst-kernel"
            path="device/xiaomi/amethyst-kernel"
-           remote="upstream"
-           revision="lineage-23.2" />
+           remote="mine"
+           revision="lineage-23.2-global307" />
 
   <project name="proprietary_vendor_xiaomi_amethyst"
            path="vendor/xiaomi/amethyst"
@@ -47,5 +45,6 @@
   <project name="android_hardware_xiaomi"
            path="hardware/xiaomi"
            remote="upstream"
-           revision="lineage-23.2" />
+           revision="57621c3dece8d7dfa33ee92c6ba346cb58db95d8"
+           upstream="refs/heads/lineage-23.2" />
 </manifest>
