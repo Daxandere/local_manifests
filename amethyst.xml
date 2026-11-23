@@ -27,10 +27,13 @@
   <remote name="upstream" fetch="https://github.com/amethyst-playground" />
   <remote name="mine"     fetch="https://github.com/Daxandere" />
 
+  <!-- The release candidate branch is the one to build: it carries the libperfmgr
+       power HAL, the 60-120 Hz boot range and the camera fixes on top of
+       lineage-23.2. Point this back at lineage-23.2 to build the bare base. -->
   <project name="android_device_xiaomi_amethyst"
            path="device/xiaomi/amethyst"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="amethyst-23.2-rc1" />
 
   <project name="android_device_xiaomi_amethyst-kernel"
            path="device/xiaomi/amethyst-kernel"

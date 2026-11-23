@@ -28,6 +28,22 @@ m -j16 bacon
 
 Update an existing local-manifest checkout with
 `git -C .repo/local_manifests pull --ff-only` before running `repo sync`.
+
+## Branch the manifest syncs
+
+`amethyst.xml` follows the device tree branch `amethyst-23.2-rc1`, the state that
+was flashed and tested on the phone: `lineage-23.2` plus the `libperfmgr` power
+HAL, the 60-120 Hz boot range, the camera/EIS fixes and the 24 dp shade overlay.
+A fresh `repo sync` therefore lands on a tree that builds as-is. Switch that
+`revision` back to `lineage-23.2` to build the bare base without the RC work.
+
+The build used for the device is produced with
+
+```bash
+TARGET_UNOFFICIAL_BUILD_ID=rcd1 m -j32 bacon
+```
+
+which only changes the ZIP name.
 For Linux dependencies and build verification, see the
 [device build guide](https://github.com/Daxandere/android_device_xiaomi_amethyst/blob/lineage-23.2/docs/BUILD.md).
 
