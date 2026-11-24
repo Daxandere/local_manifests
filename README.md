@@ -31,11 +31,7 @@ Update an existing local-manifest checkout with
 
 ## Branch the manifest syncs
 
-`amethyst.xml` follows the device tree branch `amethyst-23.2-rc1`, the state that
-was flashed and tested on the phone: `lineage-23.2` plus the `libperfmgr` power
-HAL, the 60-120 Hz boot range, the camera/EIS fixes and the 24 dp shade overlay.
-A fresh `repo sync` therefore lands on a tree that builds as-is. Switch that
-`revision` back to `lineage-23.2` to build the bare base without the RC work.
+`amethyst.xml` follows the main device tree branch `lineage-23.2`, which carries all hardware-verified changes (`libperfmgr` power HAL, 60-120 Hz boot range, 24 dp shade blur, Bluetooth/F2FS fixes, camera 1080p/`0.7x` fixes and HWC3 *Show taps* fix). A fresh `repo sync` lands on a tree that builds as-is.
 
 The build used for the device is produced with
 
