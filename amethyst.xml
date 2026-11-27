@@ -35,7 +35,7 @@
   <project name="android_device_xiaomi_amethyst-kernel"
            path="device/xiaomi/amethyst-kernel"
            remote="mine"
-           revision="lineage-23.2-global307" />
+           revision="lineage-23.2" />
 
   <project name="proprietary_vendor_xiaomi_amethyst"
            path="vendor/xiaomi/amethyst"
