@@ -1,50 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Local manifest for the Redmi Note 14 Pro+ 5G (amethyst), LineageOS 23.2.
-
-  Clone this repository into $SRC/.repo/local_manifests, or copy this file
-  there.
-
-  The device tree lives in this repository:
-      https://github.com/Daxandere/android_device_xiaomi_amethyst
-
-  Daxandere maintains the matching device, kernel and vendor trees for
-  HyperOS Global 307. Xiaomi hardware support uses the tested upstream revision.
-
-  The Qualcomm pieces are NOT listed here on purpose: LineageOS already
-  provides them in snippets/lineage.xml, including
-      device/qcom/sepolicy_vndr/sm8650   (lineage-23.2-caf-sm8650)
-      hardware/qcom-caf/sm8650           (audio, display, data-ipa)
-      hardware/qcom-caf/common           (creates device/qcom/sepolicy_vndr/SEPolicy.mk)
-      vendor/qcom/opensource/*           (core-utils-vendor, power, display, ...)
-  Adding any of them again makes `repo` abort with "duplicate path".
-
-  This manifest uses HTTPS, which works without SSH keys on a fresh build
-  server. If you prefer SSH, change the "mine" fetch value to
-  git@github.com:Daxandere (repo also accepts the ssh:// form).
+  Local manifest for the Redmi Note 14 Pro+ 5G Global (amethyst), LineageOS 24.0 (Android 17).
 -->
 <manifest>
-  <remote name="upstream" fetch="https://github.com/amethyst-playground" />
-  <remote name="mine"     fetch="https://github.com/Daxandere" />
+  <remote name="mine" fetch="https://github.com/Daxandere" />
 
   <project name="android_device_xiaomi_amethyst"
            path="device/xiaomi/amethyst"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="lineage-24.0" />
 
   <project name="android_device_xiaomi_amethyst-kernel"
            path="device/xiaomi/amethyst-kernel"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="lineage-24.0" />
 
   <project name="proprietary_vendor_xiaomi_amethyst"
            path="vendor/xiaomi/amethyst"
            remote="mine"
-           revision="lineage-23.2" />
+           revision="lineage-24.0" />
 
-  <project name="android_hardware_xiaomi"
+  <project name="LineageOS/android_hardware_xiaomi"
            path="hardware/xiaomi"
-           remote="upstream"
-           revision="57621c3dece8d7dfa33ee92c6ba346cb58db95d8"
-           upstream="refs/heads/lineage-23.2" />
+           revision="lineage-24.0" />
 </manifest>
